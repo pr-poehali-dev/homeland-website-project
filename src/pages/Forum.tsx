@@ -14,6 +14,41 @@ import Icon from "@/components/ui/icon";
 const Forum = () => {
   const navigate = useNavigate();
 
+  const governmentCategories = [
+    {
+      title: "МВД",
+      description: "Министерство внутренних дел - обсуждения и объявления",
+      posts: 87,
+      lastPost: "1 час назад",
+      icon: "Shield",
+      color: "blue",
+    },
+    {
+      title: "ФСБ",
+      description: "Федеральная служба безопасности - секретные материалы",
+      posts: 34,
+      lastPost: "4 часа назад",
+      icon: "Eye",
+      color: "red",
+    },
+    {
+      title: "Министерство Обороны",
+      description: "Военные операции и стратегические планы",
+      posts: 156,
+      lastPost: "30 минут назад",
+      icon: "Sword",
+      color: "green",
+    },
+    {
+      title: "Правительство",
+      description: "Официальные указы и государственные решения",
+      posts: 203,
+      lastPost: "2 часа назад",
+      icon: "Building2",
+      color: "yellow",
+    },
+  ];
+
   const categories = [
     {
       title: "Общее обсуждение",
@@ -80,8 +115,52 @@ const Forum = () => {
 
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
+            {/* Государственные организации */}
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold mb-6 text-red-400 flex items-center gap-2">
+                <Icon name="Crown" size={24} />
+                Государственные организации
+              </h2>
+              <div className="space-y-4">
+                {governmentCategories.map((category, index) => (
+                  <Card
+                    key={index}
+                    className="bg-gradient-to-r from-gray-800/50 to-gray-700/30 border-gray-600 hover:border-red-500 transition-all duration-300 cursor-pointer shadow-lg"
+                  >
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <CardTitle
+                            className={`text-${category.color}-400 flex items-center gap-2 text-lg`}
+                          >
+                            <Icon name={category.icon} size={20} />
+                            {category.title}
+                          </CardTitle>
+                          <CardDescription className="text-gray-300">
+                            {category.description}
+                          </CardDescription>
+                        </div>
+                        <Badge
+                          variant="outline"
+                          className={`border-${category.color}-500 text-${category.color}-400 bg-${category.color}-900/20`}
+                        >
+                          {category.posts}
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-gray-400">
+                        Последнее сообщение: {category.lastPost}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* Общие категории */}
             <h2 className="text-2xl font-bold mb-6 text-purple-400">
-              Категории
+              Общие категории
             </h2>
             <div className="space-y-4">
               {categories.map((category, index) => (
